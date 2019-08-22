@@ -1,0 +1,476 @@
+/* https://codepen.io/DeMichieli/pen/wLGJNq */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+._topcontainer {
+
+}
+
+._container{
+    overflow:hidden;
+    position:relative;
+    height: 100vh;
+}
+
+body{
+    background: #ffd5be; 
+    transition: 3s;
+    
+}
+
+
+#sun {
+    position:absolute;
+    left: 40%;
+    top: 30%;
+    height: 100px;
+    width: 100px;
+    transform: scale(2.5);
+    border-radius: 50%;
+    background: linear-gradient(to right, #ff8a5c 40%,#e74c3c 100%);
+    transition: all 1s cubic-bezier(0.740, 0, 0.455, 1); 
+    /* -webkit-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650); 
+   -moz-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650); 
+     -o-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650);  
+        transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650);   */
+    transition-delay: .4s;
+    animation: rays 2s infinite;
+    z-index: -2;
+}
+
+/* This is a layer behind the sun that drops the shdow*/
+#sun-shadow {
+    background: linear-gradient(to right, #ff8a5c 40%,#e74c3c 100%);
+    -webkit-box-shadow: 31px 38px 11px -23px rgba(0,0,0,0.75);
+    box-shadow: 31px 38px 60px -23px rgba(0,0,0,0.75);
+    position:absolute;
+    left: 40%;
+    top: 30%;
+    height: 100px;
+    width: 100px;
+    transform: scale(2.5);
+    border-radius: 50%;
+    background: linear-gradient(to right, #ff8a5c 40%,#e74c3c 100%);
+    transition: all 1s cubic-bezier(0.740, 0, 0.455, 1); 
+    /* -webkit-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650); 
+   -moz-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650); 
+     -o-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650);  
+        transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650);   */
+    transition-delay: .4s;
+    z-index: -2;
+
+}
+
+
+/* Moon is down in its initial position */
+#moon {  
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background: silver;
+    border-radius: 50%;
+    left: 40%;
+    top: 130%;
+    transform: scale(2.5);
+    -webkit-box-shadow: inset -40px 30px 10px -20px rgba(0,0,0,0.48);
+    -moz-box-shadow: inset -40px 30px 10px -20px rgba(0,0,0,0.48);
+    box-shadow: inset -40px 30px 10px -20px rgba(0,0,0,0.48), 10px 1px 20px 0px rgba(0,0,0,0.3); 
+    transition: all 1s cubic-bezier(0.740, 0, 0.455, 1); 
+    /* -webkit-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650); 
+   -moz-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650); 
+     -o-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650);  
+        transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650);   */
+    transition-delay: .4s;
+    z-index: -2;
+} 
+
+/* this serves for the animation and it's behind the shadow   */
+#moon-shadow { 
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background: silver;
+    border-radius: 50%;
+    left: 40%;
+    top: 130%;
+    transform: scale(2.5);
+    z-index: -1;
+    animation: glowing 5s infinite; 
+    /*    transition: all 1s cubic-bezier(0.740, 0, 0.455, 1);   */
+    /* -webkit-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650); 
+   -moz-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650); 
+     -o-transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650);  
+        transition: all 1s cubic-bezier(0.740, -0.600, 0.455, 1.650);   */
+    transition-delay: .4s;
+    z-index: -4;
+}
+
+#switcher {
+    cursor: pointer;
+    font-family: 'Lobster', cursive;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    background: rgba(230, 109, 61, 0.3);
+    color: white;
+    height:35px;
+    border-radius: 40px;
+    position: absolute;
+    top:10%;
+    left: 10%;
+    z-index: 223;
+    transition: 3s;
+}
+
+
+#animation-switcher {
+    cursor: pointer;
+    font-family: 'Lobster', cursive;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    background: rgba(230, 109, 61, 0.3);
+    color: white;
+    height:35px;
+    border-radius: 40px;
+    position: absolute;
+    top:30%;
+    left: 10%;
+    z-index: 223;
+    transition: 3s;
+
+}
+
+.mountain {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+/* CLOUDS */
+
+#cloud3 {
+    position: absolute;
+    background: linear-gradient(to bottom, #feccb1 45%,#F7AA80 130%);  
+    width: 100px;
+    height: 40px;
+    left: 30%;
+    top: 30%;
+    border-radius: 50px;
+    z-index: -1;
+    transition: 1s;
+    transition-delay: .2s;
+    -webkit-box-shadow: 10px 10px 30px 0px rgba(0,0,0,0.3);
+
+    animation: move 10s linear infinite   alternate;
+
+
+} 
+
+#cloud3:after {
+    
+    content: "";
+    position: absolute;
+    background:  #feccb1;   
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    top: -30px;
+    left: 10px;
+}
+
+#cloud3:before {
+    content: "";
+    position: absolute;
+    background:  #feccb1;  
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: -20px;
+    right: 10px;
+}
+
+#cloud4 {
+    
+    position: absolute;
+    background: linear-gradient(to bottom, #feccb1 45%,#F7AA80 130%);  
+    width: 200px;
+    height: 80px;
+    left: 50%;
+    top: 30%;
+    border-radius: 50px;
+    transition: 1s;
+    transition-delay: .2s;
+    animation: move 10s linear infinite   alternate;
+    -webkit-box-shadow: 10px 10px 30px 0px rgba(0,0,0,0.1);
+    z-index: -1;
+
+} 
+
+#cloud4:after {
+    
+    content: "";
+    position: absolute;
+    background:  #feccb1;  
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    top: -60px;
+    left: 10px;
+}
+
+#cloud4:before {
+    content: "";
+    position: absolute;
+    background: #feccb1;  
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    top: -40px;
+    right: 40px;
+}
+
+#cloud5 {
+    position: absolute;
+    background: linear-gradient(to bottom, #ffb76b 45%,#ffc889 130%,#ff7f04 100%); 
+    width: 100px;
+    height: 40px;
+    left: 35%;
+    top: 20%;
+    border-radius: 50px;
+    z-index: -1;
+    transition: 1s;
+    transition-delay: .2s;
+    -webkit-box-shadow: 10px 10px 30px 0px rgba(0,0,0,0.3);
+    animation: move 10s linear infinite   alternate;
+
+
+} 
+
+#cloud5:after {
+    
+    content: "";
+    position: absolute;
+    background:#ffb76b;  
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    top: -30px;
+    left: 10px;
+}
+
+#cloud5:before {
+    content: "";
+    position: absolute;
+    background: #ffb76b;  
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: -20px;
+    right: 10px;
+}
+
+/* STARS */
+
+
+
+#star {
+    position: absolute;
+    left: 54%;
+    top: 40%;
+    height: 90px;
+    width: 1px;
+    background: radial-gradient(ellipse at center, #f9f9f9 9%,#1e5799 98%);
+    border-radius: 50%;
+    visibility: hidden;
+    opacity: 0;
+
+}
+
+#star:before {
+    position: absolute;
+    content: '';
+    height: 90px;
+    width: 1px;
+    background: radial-gradient(ellipse at center, #f9f9f9 29%,#1e5799 98%);     
+    border-radius: 50%;
+    transform: rotate(90deg);
+
+}
+
+#star:after {
+    position: absolute;
+    content: '';
+    height: 90px;
+    width: 1px;
+    background: radial-gradient(ellipse at center, #f9f9f9 29%,#1e5799 98%);
+    border-radius: 50%;
+    transform: rotate(-45deg);
+}
+
+#star1 {
+    position: absolute;
+    left: 30%;
+    top: 20%;
+    height: 60px;
+    width: 1px;
+    visibility: hidden;
+    opacity: 0;
+    background: radial-gradient(ellipse at center, #f9f9f9 29%,#1e5799 98%);
+    border-radius: 50%;
+    transform: rotate(45deg);
+}
+
+#star1:before {
+    position: absolute;
+    content: '';
+    height: 60px;
+    width: 1px;
+    background: radial-gradient(ellipse at center, #f9f9f9 29%,#1e5799 98%);     
+    border-radius: 50%;
+    transform: rotate(90deg);
+
+}
+
+#star1:after {
+    position: absolute;
+    content: '';
+    height: 60px;
+    width: 1px;
+    background: radial-gradient(ellipse at center, #f9f9f9 29%,#1e5799 98%);
+    border-radius: 50%;
+    transform: rotate(-45deg);
+    z-index: -1;
+}
+
+#star2 {
+    position: absolute;
+    left: 52%;
+    top: 9%;
+    height: 60px;
+    width: 1px;
+    visibility: hidden;
+    opacity: 0;
+    background: radial-gradient(ellipse at center, #f9f9f9 29%,#1e5799 98%);
+    border-radius: 50%;
+    transform: rotate(45deg);
+}
+
+#star2:before {
+    position: absolute;
+    content: '';
+    height: 60px;
+    width: 1px;
+    background: radial-gradient(ellipse at center, #f9f9f9 29%,#1e5799 98%);     
+    border-radius: 50%;
+    transform: rotate(90deg);
+
+}
+
+#star2:after {
+    position: absolute;
+    content: '';
+    height: 60px;
+    width: 1px;
+    background: radial-gradient(ellipse at center, #f9f9f9 29%,#1e5799 98%);
+    border-radius: 50%;
+    transform: rotate(-45deg);
+    z-index: -1;
+}
+
+
+/*ANIMATIONS*/
+
+@keyframes rays
+{
+    0% {
+        box-shadow: 0 0 0 0px rgba(255, 26, 0, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+    }
+}
+
+@keyframes move {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    
+    50% {
+        transform: translate(50px, 0);
+    }
+    
+    100% {
+        transform: translate(-50px, 0);
+    }
+}
+
+@keyframes glowing {
+    0% { box-shadow: 0 0 90px #ecf0f1; }
+    40% { box-shadow: 0 0 60px #ecf0f1; }
+    60% { box-shadow: 0 0 60px #ecf0f1; }
+    100% { box-shadow: 0 0 90px #ecf0f1; }
+}
+
+@keyframes color {
+    
+    0% {
+        transform: scale(2.5);
+        
+        
+        ;} 
+    50% {
+        transform: scale(3.5);
+
+        ;}
+    100% {
+        transform: scale(2.5);
+
+        ;}
+}
+
+.run-animation {
+    position: relative;
+    animation: color 2s ease ;
+}
+
+.toppoem {
+    width: 100%;
+    position: absolute;
+    z-index: 9999;
+}
+
+.poem {
+    display: inline-block;
+    /* font-family: 'Poiret One', cursive; */
+    font-family: 'Open Sans Condensed', sans-serif;
+    /* font-family: 'Rubik', sans-serif; */
+    font-size: 1.8rem;
+    color: black;
+
+    -moz-text-shadow: 0 0 5px #fff;
+    -webkit-text-shadow: 0 0 5px #fff;
+    text-shadow: 0 0 7px #fff;
+    transition-duration: 3s;
+}
+
+#poem .small {
+    font-size: 80%;
+}
+
+#poem .text-center {
+    text-align: center !important;
+    width: 100%;
+    display: inline-block;
+}
+
+.tab:after {
+    content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+}
