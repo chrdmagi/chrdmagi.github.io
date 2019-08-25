@@ -25,7 +25,7 @@ const poem = document.getElementById('poem');
 
 
 //mouseover
-document.addEventListener('click', () => {
+document.addEventListener('mousedown', () => {
     if (signal.style.display == "none") {
         
         signal.style.display = "block" 
