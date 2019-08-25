@@ -458,7 +458,10 @@ body{
     -moz-text-shadow: 0 0 5px #fff;
     -webkit-text-shadow: 0 0 5px #fff;
     text-shadow: 0 0 7px #fff;
-    transition: color 3s;
+    transition: all 0s;
+    /* transition: font-size 0s; */
+    /* transition: color 3s; */
+    /* transition: text-shadow 3s; */
 }
 
 #poem .small {
